@@ -1,0 +1,15 @@
+\frametitle{\LaTeX{} Tutorial: sagetex}
+\begin{block}{Do the following}
+\begin{enumerate}
+\item Put \verb|\usepackage{sagetex}| in the {\bf preamble} of your
+latex document. This means put it after \verb|\documentclass...| and before \verb|\begin{document}|.
+
+\item Try typing this formula in: \verb|$2018 = \sage{factor(2018)}$|.
+
+\item Once that works, try
+some things from \url{http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/sagetex/sagetexpackage.pdf}
+
+\item \verb|\sageplot[width=.7\textwidth]{plot(sin,0,1)}|
+
+\end{enumerate}
+\end{block}

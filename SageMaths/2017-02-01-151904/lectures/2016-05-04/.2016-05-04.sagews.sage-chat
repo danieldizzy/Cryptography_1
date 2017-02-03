@@ -1,0 +1,4 @@
+
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-04T19:50:55.923Z","event":"start_video","payload":{"room_id":2.6574627857347875e+23}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-04T19:51:28.350Z","event":"stop_video","payload":{"room_id":2.6574627857347875e+23}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-04T19:51:29.564Z","event":"stop_video","payload":{"room_id":2.6574627857347875e+23}}

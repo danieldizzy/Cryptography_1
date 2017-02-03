@@ -1,0 +1,40 @@
+
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:05:04.875Z","event":"chat","payload":{"content":"This is from http://scikit-learn.org/stable/tutorial/basic/tutorial.html"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:05:10.816Z","event":"chat","payload":{"content":"Any clue at the bottom how to plot that image?"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:05:27.903Z","event":"chat","payload":{"content":"wait, let me see"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:05:38.979Z","event":"chat","payload":{"content":"Found it: http://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:05:42.805Z","event":"chat","payload":{"content":"uhm, where what?!"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:05:56.515Z","event":"chat","payload":{"content":"ah! yes, sure."}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:06:23.588Z","event":"chat","payload":{"content":"ok"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:06:27.500Z","event":"chat","payload":{"content":"somethign just happened"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:06:46.615Z","event":"chat","payload":{"content":"what I wanted to do is matshow and reshape"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:09:10.541Z","event":"chat","payload":{"content":"`reshape` is numpy, again, but i should be self-explanatory"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:09:17.875Z","event":"chat","payload":{"content":"yep"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:12:03.559Z","event":"chat","payload":{"content":"So what is this data?"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:12:10.523Z","event":"chat","payload":{"content":"Is it 1797 numbers between 0 and 9"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:12:13.013Z","event":"chat","payload":{"content":"Written by hand?"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:12:18.552Z","event":"chat","payload":{"content":"yes"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:12:31.806Z","event":"chat","payload":{"content":"it's from the postal code numbers on letters (zip codes) or so"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:12:57.782Z","event":"chat","payload":{"content":"the idea is, that you have a vector of numbers for each of the numbers, which could be interpreted as a blurry image"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:13:02.761Z","event":"chat","payload":{"content":"See my line 128 based on what you put"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:13:05.915Z","event":"chat","payload":{"content":"the actual number that it represents is the \"label\""}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:14:36.300Z","event":"chat","payload":{"content":"statsmodelssure assumes the user knows a lot of stats :-)"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:14:58.623Z","event":"chat","payload":{"content":"ok, there is a support vector machine, ok, well, that tries to do some approximation, but not sure if the default works well here"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:15:18.924Z","event":"chat","payload":{"content":"yes, the api is important, fit for training, and then the prediction for the label"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:15:59.229Z","event":"chat","payload":{"content":"it's actually interesting to run the prediction on *all* the numbers again, to see how many are predicted correctly yb the model"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:16:05.433Z","event":"chat","payload":{"content":"(just as an idea what you can show)"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:16:35.316Z","event":"chat","payload":{"content":"then you can say, \"hey, 80% of the 8th were classified correctly, but only 70% of the 7s\""}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:16:43.283Z","event":"chat","payload":{"content":"oh, I see :-)"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:16:47.976Z","event":"chat","payload":{"content":"good exercise, yes"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:17:49.533Z","event":"chat","payload":{"content":"and then, once you know those quality parameters → go back to the model parameters and start tweaking them to find a better ratio. e.g. this \"degree\" maybe, not sure."}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:18:14.015Z","event":"chat","payload":{"content":"Longer homework about this next week."}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:18:21.168Z","event":"chat","payload":{"content":"This is just going to be an in-class 30 minutes."}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:18:23.905Z","event":"chat","payload":{"content":"yes"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:18:32.181Z","event":"chat","payload":{"content":"and then there are two ideas related to that: training set"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:18:46.197Z","event":"chat","payload":{"content":"i.e. you partition the original data randomly into 80% vs 20% or so"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:19:06.365Z","event":"chat","payload":{"content":"use 80% for learning, and 20% for testing it (this quality measure of how many are correct)"}}
+{"sender_id":"25e2cae4-05c7-4c28-ae22-1e6d3d2e8bb5","date":"2016-05-13T19:19:14.334Z","event":"chat","payload":{"content":"I wish you were teaching my class today :-)"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:19:27.036Z","event":"chat","payload":{"content":"second topic is about \"overfitting\". that your model works too good for the training data, and fails for the test data"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:19:30.904Z","event":"chat","payload":{"content":":-)"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:19:53.365Z","event":"chat","payload":{"content":"http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html"}}
+{"sender_id":"3c40513b-7e7c-450c-aa13-bf4f3411cf33","date":"2016-05-13T19:20:18.500Z","event":"chat","payload":{"content":"above is such a helper. takes time to read all their api stuff, but this is a building block for automated tuning"}}

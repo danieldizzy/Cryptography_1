@@ -1,0 +1,46 @@
+\documentclass{article}
+\title{Problem 3: The Sage Zone}
+\author{UW Student who knows SageTex!}
+\date{2016-04-22}
+\usepackage{sagetex}
+
+\begin{document}
+\maketitle
+
+\section{Factoring Years\label{years}}
+Sage says\footnote{These factorization are
+computed using sagetex!} that $2016=\sage{factor(2016)}$ and
+$2017=\sage{factor(2017)}$.
+
+\section{Plotting a Function\label{plotting}}
+Here is a plot of $\sin(x^2)$ made using sagetex.  Your
+plot should be about this size (not enormous).
+\vspace{.5in}
+
+\sageplot[width=.7\textwidth]{plot(sin(x^2), 0, pi)}
+
+\section{Deriving a Formula\label{formula}}
+
+Sage can find a formula for
+$
+ f(n) = \sin(1) + \sin(2) + \cdots + \sin(n).
+$
+Just enter this code into Sage (in sagetex use the sageblock environment):
+\begin{sageblock}
+var('k, n')
+f = sum(sin(k), k, 1, n)
+\end{sageblock}
+and find that
+{\tiny
+$$
+f = \sage{f}
+$$
+}
+
+Here is a plot of the formula above from $0$ to $100$:
+
+\sageplot[width=\textwidth]{plot(f, 0, 100, color='red')}
+
+
+
+\end{document}

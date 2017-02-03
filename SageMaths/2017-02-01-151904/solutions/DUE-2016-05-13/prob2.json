@@ -1,0 +1,373 @@
+[
+  {
+    "url": "https://api.github.com/repos/pydata/pandas/issues/13120",
+    "repository_url": "https://api.github.com/repos/pydata/pandas",
+    "labels_url": "https://api.github.com/repos/pydata/pandas/issues/13120/labels{/name}",
+    "comments_url": "https://api.github.com/repos/pydata/pandas/issues/13120/comments",
+    "events_url": "https://api.github.com/repos/pydata/pandas/issues/13120/events",
+    "html_url": "https://github.com/pydata/pandas/issues/13120",
+    "id": 153805107,
+    "number": 13120,
+    "title": "Index construction fails (or produces erroneous result) with memoryview as input.",
+    "user": {
+      "login": "ssanderson",
+      "id": 1588357,
+      "avatar_url": "https://avatars.githubusercontent.com/u/1588357?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ssanderson",
+      "html_url": "https://github.com/ssanderson",
+      "followers_url": "https://api.github.com/users/ssanderson/followers",
+      "following_url": "https://api.github.com/users/ssanderson/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ssanderson/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ssanderson/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ssanderson/subscriptions",
+      "organizations_url": "https://api.github.com/users/ssanderson/orgs",
+      "repos_url": "https://api.github.com/users/ssanderson/repos",
+      "events_url": "https://api.github.com/users/ssanderson/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ssanderson/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Compat",
+        "name": "Compat",
+        "color": "0052cc"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Difficulty%20Intermediate",
+        "name": "Difficulty Intermediate",
+        "color": "fbca04"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Dtypes",
+        "name": "Dtypes",
+        "color": "e102d8"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Effort%20Medium",
+        "name": "Effort Medium",
+        "color": "006b75"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Timeseries",
+        "name": "Timeseries",
+        "color": "AFEEEE"
+      }
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "milestone": {
+      "url": "https://api.github.com/repos/pydata/pandas/milestones/32",
+      "html_url": "https://github.com/pydata/pandas/milestones/Next%20Major%20Release",
+      "labels_url": "https://api.github.com/repos/pydata/pandas/milestones/32/labels",
+      "id": 933188,
+      "number": 32,
+      "title": "Next Major Release",
+      "description": "after 0.18.0 of course",
+      "creator": {
+        "login": "jreback",
+        "id": 953992,
+        "avatar_url": "https://avatars.githubusercontent.com/u/953992?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/jreback",
+        "html_url": "https://github.com/jreback",
+        "followers_url": "https://api.github.com/users/jreback/followers",
+        "following_url": "https://api.github.com/users/jreback/following{/other_user}",
+        "gists_url": "https://api.github.com/users/jreback/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/jreback/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/jreback/subscriptions",
+        "organizations_url": "https://api.github.com/users/jreback/orgs",
+        "repos_url": "https://api.github.com/users/jreback/repos",
+        "events_url": "https://api.github.com/users/jreback/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/jreback/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "open_issues": 941,
+      "closed_issues": 133,
+      "state": "open",
+      "created_at": "2015-01-13T10:53:19Z",
+      "updated_at": "2016-05-09T15:54:35Z",
+      "due_on": "2016-08-31T04:00:00Z",
+      "closed_at": null
+    },
+    "comments": 11,
+    "created_at": "2016-05-09T15:36:11Z",
+    "updated_at": "2016-05-09T17:35:40Z",
+    "closed_at": null,
+    "body": "#### Code Sample, a copy-pastable example if possible\r\n\r\nFirst noted in discussion here: https://github.com/quantopian/zipline/pull/1190/files/fe5a2a888a498d838c3cc43de2c33ac08b20d2a7#r62506342.  This most often matters when passing a value typed in Cython as something like `int64_t[:]`.\r\n\r\nSimple repro cases:\r\n\r\nDatetimeIndex construction fails (looks like trying to parse strings?), and vanilla Index construction returns an array of unicode strings.\r\n```\r\nIn [6]: import pandas as pd; import numpy as np\r\n\r\nIn [7]: pd.__version__, np.__version__\r\nOut[7]: ('0.18.1+20.gaf7bdd3', '1.11.0')\r\n\r\nIn [8]: m = memoryview(np.arange(5))\r\n\r\nIn [9]: pd.DatetimeIndex(m)\r\n---------------------------------------------------------------------------\r\nValueError                                Traceback (most recent call last)\r\n<ipython-input-9-09b855a663a4> in <module>()\r\n----> 1 pd.DatetimeIndex(m)\r\n\r\n/home/ssanderson/clones/pandas/pandas/util/decorators.pyc in wrapper(*args, **kwargs)\r\n     89                 else:\r\n     90                     kwargs[new_arg_name] = new_arg_value\r\n---> 91             return func(*args, **kwargs)\r\n     92         return wrapper\r\n     93     return _deprecate_kwarg\r\n\r\n/home/ssanderson/clones/pandas/pandas/tseries/index.pyc in __new__(cls, data, freq, start, end, periods, copy, name, tz, verify_integrity, normalize, closed, ambiguous, dtype, **kwargs)\r\n    283                 data = tslib.parse_str_array_to_datetime(data, freq=freq,\r\n    284                                                          dayfirst=dayfirst,\r\n--> 285                                                          yearfirst=yearfirst)\r\n    286             else:\r\n    287                 data = tools.to_datetime(data, errors='raise')\r\n\r\n/home/ssanderson/clones/pandas/pandas/tslib.pyx in pandas.tslib.parse_str_array_to_datetime (pandas/tslib.c:39610)()\r\n   2175                         except ValueError:\r\n   2176                             if is_coerce:\r\n-> 2177                                 iresult[i] = NPY_NAT\r\n   2178                                 continue\r\n   2179                             raise\r\n\r\nValueError:\r\n\r\nIn [10]: pd.Index(m)\r\nOut[10]: Index([u'', u'', u'', u'', u''], dtype='object')\r\n```\r\n\r\n#### Expected Output\r\n\r\nI'd expect this to either error immediately or provide the same result as coercing the provided memoryview into a numpy array.\r\n\r\n#### output of ``pd.show_versions()``\r\n\r\n```\r\nIn [6]: pd.show_versions()\r\n\r\nINSTALLED VERSIONS\r\n------------------\r\ncommit: af7bdd3883c8d61e9d9388d3aa699930eee7fff8\r\npython: 2.7.10.final.0\r\npython-bits: 64\r\nOS: Linux\r\nOS-release: 4.2.0-16-generic\r\nmachine: x86_64\r\nprocessor: x86_64\r\nbyteorder: little\r\nLC_ALL: None\r\nLANG: en_US.UTF-8\r\n\r\npandas: 0.18.1+20.gaf7bdd3\r\nnose: None\r\npip: 8.1.0\r\nsetuptools: 20.2.2\r\nCython: 0.24\r\nnumpy: 1.11.0\r\nscipy: None\r\nstatsmodels: None\r\nxarray: None\r\nIPython: 4.2.0\r\nsphinx: None\r\npatsy: None\r\ndateutil: 2.5.3\r\npytz: 2016.3\r\nblosc: None\r\nbottleneck: None\r\ntables: None\r\nnumexpr: None\r\nmatplotlib: None\r\nopenpyxl: None\r\nxlrd: None\r\nxlwt: None\r\nxlsxwriter: None\r\nlxml: None\r\nbs4: None\r\nhtml5lib: None\r\nhttplib2: None\r\napiclient: None\r\nsqlalchemy: None\r\npymysql: None\r\npsycopg2: None\r\njinja2: None\r\nboto: None\r\npandas_datareader: None\r\n```\r\n\r\ncc @jbredeche"
+  },
+  {
+    "url": "https://api.github.com/repos/pydata/pandas/issues/13119",
+    "repository_url": "https://api.github.com/repos/pydata/pandas",
+    "labels_url": "https://api.github.com/repos/pydata/pandas/issues/13119/labels{/name}",
+    "comments_url": "https://api.github.com/repos/pydata/pandas/issues/13119/comments",
+    "events_url": "https://api.github.com/repos/pydata/pandas/issues/13119/events",
+    "html_url": "https://github.com/pydata/pandas/issues/13119",
+    "id": 153736417,
+    "number": 13119,
+    "title": "BUG: resample with datetime64 data on series looses dtype",
+    "user": {
+      "login": "jorisvandenbossche",
+      "id": 1020496,
+      "avatar_url": "https://avatars.githubusercontent.com/u/1020496?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/jorisvandenbossche",
+      "html_url": "https://github.com/jorisvandenbossche",
+      "followers_url": "https://api.github.com/users/jorisvandenbossche/followers",
+      "following_url": "https://api.github.com/users/jorisvandenbossche/following{/other_user}",
+      "gists_url": "https://api.github.com/users/jorisvandenbossche/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/jorisvandenbossche/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/jorisvandenbossche/subscriptions",
+      "organizations_url": "https://api.github.com/users/jorisvandenbossche/orgs",
+      "repos_url": "https://api.github.com/users/jorisvandenbossche/repos",
+      "events_url": "https://api.github.com/users/jorisvandenbossche/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/jorisvandenbossche/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Bug",
+        "name": "Bug",
+        "color": "e10c02"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Difficulty%20Intermediate",
+        "name": "Difficulty Intermediate",
+        "color": "fbca04"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Effort%20Low",
+        "name": "Effort Low",
+        "color": "006b75"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Resample",
+        "name": "Resample",
+        "color": "207de5"
+      }
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "milestone": {
+      "url": "https://api.github.com/repos/pydata/pandas/milestones/40",
+      "html_url": "https://github.com/pydata/pandas/milestones/0.18.2",
+      "labels_url": "https://api.github.com/repos/pydata/pandas/milestones/40/labels",
+      "id": 1639795,
+      "number": 40,
+      "title": "0.18.2",
+      "description": "",
+      "creator": {
+        "login": "jreback",
+        "id": 953992,
+        "avatar_url": "https://avatars.githubusercontent.com/u/953992?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/jreback",
+        "html_url": "https://github.com/jreback",
+        "followers_url": "https://api.github.com/users/jreback/followers",
+        "following_url": "https://api.github.com/users/jreback/following{/other_user}",
+        "gists_url": "https://api.github.com/users/jreback/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/jreback/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/jreback/subscriptions",
+        "organizations_url": "https://api.github.com/users/jreback/orgs",
+        "repos_url": "https://api.github.com/users/jreback/repos",
+        "events_url": "https://api.github.com/users/jreback/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/jreback/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "open_issues": 162,
+      "closed_issues": 27,
+      "state": "open",
+      "created_at": "2016-03-11T21:24:45Z",
+      "updated_at": "2016-05-09T17:09:26Z",
+      "due_on": "2016-06-14T04:00:00Z",
+      "closed_at": null
+    },
+    "comments": 1,
+    "created_at": "2016-05-09T09:27:49Z",
+    "updated_at": "2016-05-09T12:36:41Z",
+    "closed_at": null,
+    "body": "From SO: http://stackoverflow.com/questions/37106810/bug-in-python-pandas-pandas-series-resample-vs-pandas-dataframe-resample\r\n\r\n```\r\nIn [7]: import datetime as dt\r\n\r\nIn [8]: df = pd.DataFrame([[dt.datetime(2016,1,31,15)], [dt.datetime(2016,2,7,17)]], index=[dt.datetime(2016,1,31,15), dt.datetime(2016,2,7,17)], columns=['timestamp'])\r\n\r\nIn [10]: df\r\nOut[10]:\r\n                              timestamp\r\n2016-01-31 15:00:00 2016-01-31 15:00:00\r\n2016-02-07 17:00:00 2016-02-07 17:00:00\r\n\r\nIn [11]: df.resample('D').first().timestamp\r\nOut[11]:\r\n2016-01-31   2016-01-31 15:00:00\r\n2016-02-01                   NaT\r\n2016-02-02                   NaT\r\n2016-02-03                   NaT\r\n2016-02-04                   NaT\r\n2016-02-05                   NaT\r\n2016-02-06                   NaT\r\n2016-02-07   2016-02-07 17:00:00\r\nFreq: D, Name: timestamp, dtype: datetime64[ns]\r\n\r\nIn [12]: df.timestamp.resample('D').first()\r\nOut[12]:\r\n2016-01-31    1.454252e+18\r\n2016-02-01             NaN\r\n2016-02-02             NaN\r\n2016-02-03             NaN\r\n2016-02-04             NaN\r\n2016-02-05             NaN\r\n2016-02-06             NaN\r\n2016-02-07    1.454864e+18\r\nFreq: D, Name: timestamp, dtype: float64\r\n\r\n```\r\n\r\nTested it with latest master"
+  },
+  {
+    "url": "https://api.github.com/repos/pydata/pandas/issues/13117",
+    "repository_url": "https://api.github.com/repos/pydata/pandas",
+    "labels_url": "https://api.github.com/repos/pydata/pandas/issues/13117/labels{/name}",
+    "comments_url": "https://api.github.com/repos/pydata/pandas/issues/13117/comments",
+    "events_url": "https://api.github.com/repos/pydata/pandas/issues/13117/events",
+    "html_url": "https://github.com/pydata/pandas/pull/13117",
+    "id": 153670017,
+    "number": 13117,
+    "title": "BUG: GH12896 where extra elements are returned in MultiIndex slicing",
+    "user": {
+      "login": "kawochen",
+      "id": 10709573,
+      "avatar_url": "https://avatars.githubusercontent.com/u/10709573?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kawochen",
+      "html_url": "https://github.com/kawochen",
+      "followers_url": "https://api.github.com/users/kawochen/followers",
+      "following_url": "https://api.github.com/users/kawochen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/kawochen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/kawochen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/kawochen/subscriptions",
+      "organizations_url": "https://api.github.com/users/kawochen/orgs",
+      "repos_url": "https://api.github.com/users/kawochen/repos",
+      "events_url": "https://api.github.com/users/kawochen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/kawochen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Bug",
+        "name": "Bug",
+        "color": "e10c02"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Indexing",
+        "name": "Indexing",
+        "color": "0b02e1"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/MultiIndex",
+        "name": "MultiIndex",
+        "color": "207de5"
+      }
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2016-05-08T18:22:44Z",
+    "updated_at": "2016-05-08T18:37:38Z",
+    "closed_at": null,
+    "pull_request": {
+      "url": "https://api.github.com/repos/pydata/pandas/pulls/13117",
+      "html_url": "https://github.com/pydata/pandas/pull/13117",
+      "diff_url": "https://github.com/pydata/pandas/pull/13117.diff",
+      "patch_url": "https://github.com/pydata/pandas/pull/13117.patch"
+    },
+    "body": " - [x] closes #12896\r\n - [ ] tests added / passed\r\n - [x] passes ``git diff upstream/master | flake8 --diff``\r\n - [x] whatsnew entry\r\n\r\nIs this the right way to do this?\r\n\r\ncc @MaximilianR "
+  },
+  {
+    "url": "https://api.github.com/repos/pydata/pandas/issues/13116",
+    "repository_url": "https://api.github.com/repos/pydata/pandas",
+    "labels_url": "https://api.github.com/repos/pydata/pandas/issues/13116/labels{/name}",
+    "comments_url": "https://api.github.com/repos/pydata/pandas/issues/13116/comments",
+    "events_url": "https://api.github.com/repos/pydata/pandas/issues/13116/events",
+    "html_url": "https://github.com/pydata/pandas/pull/13116",
+    "id": 153661517,
+    "number": 13116,
+    "title": "Validate Timestamp with invalid offset raises ValueError",
+    "user": {
+      "login": "gliptak",
+      "id": 50109,
+      "avatar_url": "https://avatars.githubusercontent.com/u/50109?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gliptak",
+      "html_url": "https://github.com/gliptak",
+      "followers_url": "https://api.github.com/users/gliptak/followers",
+      "following_url": "https://api.github.com/users/gliptak/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gliptak/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gliptak/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gliptak/subscriptions",
+      "organizations_url": "https://api.github.com/users/gliptak/orgs",
+      "repos_url": "https://api.github.com/users/gliptak/repos",
+      "events_url": "https://api.github.com/users/gliptak/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gliptak/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Error%20Reporting",
+        "name": "Error Reporting",
+        "color": "ffa0ff"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Timeseries",
+        "name": "Timeseries",
+        "color": "AFEEEE"
+      }
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2016-05-08T15:25:36Z",
+    "updated_at": "2016-05-08T17:32:03Z",
+    "closed_at": null,
+    "pull_request": {
+      "url": "https://api.github.com/repos/pydata/pandas/pulls/13116",
+      "html_url": "https://github.com/pydata/pandas/pull/13116",
+      "diff_url": "https://github.com/pydata/pandas/pull/13116.diff",
+      "patch_url": "https://github.com/pydata/pandas/pull/13116.patch"
+    },
+    "body": " - [x] closes #11630\r\n - [x] tests added / passed\r\n - [x] passes ``git diff upstream/master | flake8 --diff``\r\n - [ ] whatsnew entry\r\n\r\n"
+  },
+  {
+    "url": "https://api.github.com/repos/pydata/pandas/issues/13115",
+    "repository_url": "https://api.github.com/repos/pydata/pandas",
+    "labels_url": "https://api.github.com/repos/pydata/pandas/issues/13115/labels{/name}",
+    "comments_url": "https://api.github.com/repos/pydata/pandas/issues/13115/comments",
+    "events_url": "https://api.github.com/repos/pydata/pandas/issues/13115/events",
+    "html_url": "https://github.com/pydata/pandas/pull/13115",
+    "id": 153658327,
+    "number": 13115,
+    "title": "[BUG] Reading multiindex, incorrectly names columns without name.",
+    "user": {
+      "login": "brandys11",
+      "id": 5340467,
+      "avatar_url": "https://avatars.githubusercontent.com/u/5340467?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/brandys11",
+      "html_url": "https://github.com/brandys11",
+      "followers_url": "https://api.github.com/users/brandys11/followers",
+      "following_url": "https://api.github.com/users/brandys11/following{/other_user}",
+      "gists_url": "https://api.github.com/users/brandys11/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/brandys11/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/brandys11/subscriptions",
+      "organizations_url": "https://api.github.com/users/brandys11/orgs",
+      "repos_url": "https://api.github.com/users/brandys11/repos",
+      "events_url": "https://api.github.com/users/brandys11/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/brandys11/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/Bug",
+        "name": "Bug",
+        "color": "e10c02"
+      },
+      {
+        "url": "https://api.github.com/repos/pydata/pandas/labels/IO%20Excel",
+        "name": "IO Excel",
+        "color": "bfe5bf"
+      }
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "milestone": null,
+    "comments": 1,
+    "created_at": "2016-05-08T14:18:28Z",
+    "updated_at": "2016-05-08T14:57:28Z",
+    "closed_at": null,
+    "pull_request": {
+      "url": "https://api.github.com/repos/pydata/pandas/pulls/13115",
+      "html_url": "https://github.com/pydata/pandas/pull/13115",
+      "diff_url": "https://github.com/pydata/pandas/pull/13115.diff",
+      "patch_url": "https://github.com/pydata/pandas/pull/13115.patch"
+    },
+    "body": " - [x] closes #12453\r\n - [x] tests added / passed\r\n - [x] passes ``git diff upstream/master | flake8 --diff``\r\n - [x] whatsnew entry\r\n\r\nFixed reading and writing of Multiindex. \r\nIn a situation where Multiindex looked like this:\r\n\r\n| One | Two |\r\n| ------ | ----- |\r\n| X | |\r\n\r\nit was changed to: \r\n\r\n| One | Two |\r\n| ------ | ----- |\r\n| X | X |"
+  }
+]

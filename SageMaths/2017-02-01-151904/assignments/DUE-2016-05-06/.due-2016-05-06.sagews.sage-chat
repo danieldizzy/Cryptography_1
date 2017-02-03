@@ -1,0 +1,3 @@
+
+{"sender_id":"eb246c02-c7a4-4cd2-898a-73d87680b36f","date":"2016-05-02T16:15:02.751Z","event":"chat","payload":{"content":"http://wstein.org/wiki/attachments/2008(2f)480a(2f)schedule(2f)2008(2d)04(2d)25/worksheet.pdf"}}
+{"sender_id":"eb246c02-c7a4-4cd2-898a-73d87680b36f","date":"2016-05-02T18:55:12.303Z","event":"chat","payload":{"content":"M[0][0] if M.ncols() == 0 else sum((-1)**(col) * M[0][col] * my_det(M.delete_rows([0]).delete_columns([col])) for col in range(M.ncols()))"}}

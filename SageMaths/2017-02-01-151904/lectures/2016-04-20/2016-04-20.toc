@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Math formulas}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Some basics}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Using Sage}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Use Some random webpage}{3}{subsection.1.3}
+\contentsline {section}{\numberline {2}Sectioning and cross referencing}{3}{section.2}
+\contentsline {section}{\numberline {3}Including graphics}{3}{section.3}
